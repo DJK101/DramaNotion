@@ -1,0 +1,29 @@
+name: Run Receipt Names on URL Trigger
+
+on:
+  repository_dispatch:
+    types: [run-script]
+
+jobs:
+  run-python-script:
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the repository code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12  # Replace with your desired Python version
+
+      # Install dependencies (if any)
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      # Run the Python script
+      - name: Run script
+        run: |
+          python receipt_names.py
