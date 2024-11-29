@@ -9,6 +9,10 @@ load_dotenv()
 NOTION_TOKEN = os.getenv("NOTION_TOKEN")
 DB_ID = os.getenv("DB_ID")
 
+local_env = True
+if os.getenv("GITHUB_ACTIONS") == "true":
+    local_env = False
+
 headers = {
     "Authorization": "Bearer " + NOTION_TOKEN,
     "Notion-Version": "2022-06-28",
@@ -22,9 +26,9 @@ def get_pages():
     payload = {"page_size": 100}
     response = requests.post(url, json=payload, headers=headers)
     data = response.json()
-
-    with open("response.json", "w") as file:
-        json.dump(data, file, indent=2)
+    if local_env:
+        with open("response.json", "w") as file:
+            json.dump(data, file, indent=2)
 
     return data["results"]
 
@@ -48,8 +52,9 @@ def update_properties(page_id, properties):
     response = requests.patch(url, json=payload, headers=headers)
     data = response.json()
 
-    with open("response2.json", "w") as file:
-        json.dump(data, file, indent=2)
+    if local_env:
+        with open("response2.json", "w") as file:
+            json.dump(data, file, indent=2)
 
     return data
 
@@ -61,8 +66,9 @@ def update_icon(page_id, icon):
     response = requests.patch(url, json=payload, headers=headers)
     data = response.json()
 
-    with open("response3.json", "w") as file:
-        json.dump(data, file, indent=2)
+    if local_env:
+        with open("response3.json", "w") as file:
+            json.dump(data, file, indent=2)
 
     return data
 
