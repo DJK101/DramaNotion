@@ -7,7 +7,7 @@ import json
 load_dotenv()
 
 NOTION_TOKEN = os.getenv("NOTION_TOKEN")
-DB_ID = os.getenv("DB_ID")
+DB_ID = os.getenv("RECEIPT_DB_ID")
 
 local_env = True
 if os.getenv("GITHUB_ACTIONS") == "true":

@@ -28,6 +28,6 @@ jobs:
       - name: Run script
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-          DB_ID: ${{ secrets.DB_ID }}
+          RECEIPT_DB_ID: ${{ secrets.RECEIPT_DB_ID }}
         run: |
           python receipt_names.py
