@@ -1,4 +1,4 @@
-name: Run Receipt Names on URL Trigger
+name: Format Receipt Names
 
 on: 
   schedule:
