@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta, timezone
 import re
 import requests
 from dotenv import load_dotenv
@@ -23,7 +24,18 @@ headers = {
 def get_pages():
     url = f"https://api.notion.com/v1/databases/{DB_ID}/query"
 
-    payload = {"page_size": 100}
+    now = datetime.now(timezone.utc)
+    forty_eight_hours_ago = now - timedelta(hours=48)
+
+    payload = {
+        "page_size": 5,
+        "filter": {
+            "timestamp": "created_time",
+            "created_time": {
+                "after": forty_eight_hours_ago.isoformat()
+            }
+        }
+    }
     response = requests.post(url, json=payload, headers=headers)
     data = response.json()
     if local_env:
@@ -107,6 +119,7 @@ for result in get_pages():
         }
         properties["Receipt File"]["files"][0]["name"] = new_file_name
         properties["Name"]["title"][0]["plain_text"] = new_page_name
+        properties["Name"]["title"][0]["text"]["content"] = new_page_name
 
         update_properties(page_id, properties)
     else:
