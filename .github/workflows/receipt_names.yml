@@ -2,7 +2,7 @@ name: Run Receipt Names on URL Trigger
 
 on: 
   schedule:
-    - cron: '0 12 * * *'
+    - cron: '0 9 * * *'
   workflow_dispatch:
 
 jobs:
