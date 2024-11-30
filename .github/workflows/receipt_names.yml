@@ -30,4 +30,4 @@ jobs:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           RECEIPT_DB_ID: ${{ secrets.RECEIPT_DB_ID }}
         run: |
-          python receipt_names.py
+          python ./python/receipt_names.py
