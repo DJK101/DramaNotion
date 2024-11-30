@@ -28,7 +28,7 @@ def get_pages():
     forty_eight_hours_ago = now - timedelta(hours=48)
 
     payload = {
-        "page_size": 5,
+        "page_size": 10,
         "filter": {
             "timestamp": "created_time",
             "created_time": {
